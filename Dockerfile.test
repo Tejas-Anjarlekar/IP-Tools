@@ -1,0 +1,17 @@
+FROM oraclelinux:8
+
+# Install Python and required packages
+RUN dnf install -y python3 python3-pip && \
+    pip3 install --upgrade pip && \
+    pip3 install coverage
+
+# Set working directory
+WORKDIR /app
+
+
+# Copy your project files into the container
+COPY ip_tools.py /app/
+COPY tests /app/tests
+
+# Run tests with coverage
+CMD ["bash", "-c", "coverage run --source=ip_tools -m unittest discover tests && coverage report"]
