@@ -6,6 +6,43 @@ It will try to connect k8 cluster using `kubectl` command and get pod details us
 Once connected successfully it will parse the `json` response and get IP / Networking details and used `ipaddress` library it will check for overlapping of networks by default for all namespces.
 Using Flag `--mode namespace` it will check for isolates namespaces.
 
+### Note:
+
+```shell
+- This tool is deveoloped on Oraclelinux:8 docker image which uses python3.6 as a default version.
+```
+### Libraries Used:
+
+For main script `ip_tools.py`:
+
+```shell
+import subprocess
+import json
+import ipaddress
+import argparse
+```
+For Unit test script `test_ip_tools.py`:
+
+```shell
+import unittest
+from unittest.mock import patch, mock_open, MagicMock
+import subprocess
+```
+
+For `Dockerfile.test`:
+
+```shell
+python3 python3-pip && \
+pip3 install --upgrade pip && \
+pip3 install coverage
+```
+For `Dockerfile`:
+
+```shell
+python3 python3-pip 
+kubectl
+```
+
 ### Steps to execute the Tool:
 
 - Clone the git repo into your host where docker container needs to be deployed:
